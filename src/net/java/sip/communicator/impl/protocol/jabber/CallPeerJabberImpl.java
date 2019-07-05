@@ -162,10 +162,29 @@ public class CallPeerJabberImpl
      * Send a session-accept <tt>JingleIQ</tt> to this <tt>CallPeer</tt>
      * @throws OperationFailedException if we fail to create or send the
      * response.
+     *
+     *
+     *
+     * All XMPP negotiation and media handling here is bypassed so that
+     * IceLink can take over.
+     *
+     * Presence is still handled here.
+     *
+     *
+     *
+     *
+     *
+     *
      */
     public synchronized void answer()
         throws OperationFailedException
     {
+        // Redirect handling of the Session Init request to IceLink.
+        IQListeners.triggerEvent(IQListeners.IQEvent.OnBeforeSend, sessionInitIQ, getProtocolProvider().getConnection());
+        setState(CallPeerState.CONNECTED);
+
+        /*
+
         Iterable<ContentPacketExtension> answer;
         CallPeerMediaHandlerJabberImpl mediaHandler = getMediaHandler();
 
@@ -257,6 +276,7 @@ public class CallPeerJabberImpl
         //tell everyone we are connected so that the audio notifications would
         //stop
         setState(CallPeerState.CONNECTED);
+        */
     }
 
     /**

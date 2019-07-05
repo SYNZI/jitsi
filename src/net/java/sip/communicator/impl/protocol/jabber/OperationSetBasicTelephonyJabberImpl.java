@@ -1091,6 +1091,9 @@ public class OperationSetBasicTelephonyJabberImpl
 
             final CallJabberImpl finalCall = call;
 
+
+            /*
+            Bypassing this in favor of IceLink processing
             new Thread()
             {
                 @Override
@@ -1099,6 +1102,13 @@ public class OperationSetBasicTelephonyJabberImpl
                     finalCall.processSessionInitiate(jingleIQ);
                 }
             }.start();
+            */
+            // Raise session-initiate to Jigasi so IceLink can process.
+            Runnable runnable = () => {
+                IQListeners.triggerEvent(IQListeners.IQEvent.OnReceive, jingleIQ, protocolProvider.getConnection());
+            };
+            Thread thread = new Thread(runnable);
+            thread.start();
 
             return;
         }
@@ -1195,14 +1205,21 @@ public class OperationSetBasicTelephonyJabberImpl
         else if (action == JingleAction.TRANSPORT_INFO)
         {
             callPeer.processTransportInfo(jingleIQ);
+
+            // Raise transport-info to Jigasi so IceLink can process.
+            IQListeners.triggerEvent(IQListeners.IQEvent.OnReceive, jingleIQ, protocolProvider.getConnection());
         }
         else if (action == JingleAction.SOURCEADD)
         {
-            callPeer.processSourceAdd(jingleIQ);
+            // Raise source-add to Jigasi where IceLink will process.
+            // callPeer.processSourceAdd(jingleIQ);
+            IQListeners.triggerEvent(IQListeners.IQEvent.OnReceive, jingleIQ, protocolProvider.getConnection());
         }
         else if (action == JingleAction.SOURCEREMOVE)
         {
-            callPeer.processSourceRemove(jingleIQ);
+            // Raise source-remove to Jigasi where IceLink will process
+            //callPeer.processSourceRemove(jingleIQ);
+            IQListeners.triggerEvent(IQListeners.IQEvent.OnReceive, jingleIQ, protocolProvider.getConnection());
         }
     }
 

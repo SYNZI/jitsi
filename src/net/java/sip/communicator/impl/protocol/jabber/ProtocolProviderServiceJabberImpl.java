@@ -1727,8 +1727,9 @@ public class ProtocolProviderServiceJabberImpl
             supportedFeatures.add("http://jabber.org/protocol/muc#rooms");
             supportedFeatures.add("http://jabber.org/protocol/muc#traffic");
 
+            // Not adding header extension support as IceLInk does not support this.
             // RTP HDR extension
-            supportedFeatures.add(URN_XMPP_JINGLE_RTP_HDREXT);
+            //supportedFeatures.add(URN_XMPP_JINGLE_RTP_HDREXT);
 
             //register our jingle provider
             ProviderManager.addIQProvider( JingleIQ.ELEMENT_NAME,
@@ -2012,6 +2013,11 @@ public class ProtocolProviderServiceJabberImpl
                     = new OperationSetConnectionInfoJabberImpl();
             addSupportedOperationSet(OperationSetConnectionInfo.class,
                     opsetConnectionInfo);
+
+            // Make sure Jigasi has the following features added.
+            supportedFeatures.add("urn:ietf:rfc:4588");
+            supportedFeatures.add("urn:ietf:rfc:5761");
+            supportedFeatures.add("urn:ietf:rfc:5888");
 
             isInitialized = true;
         }

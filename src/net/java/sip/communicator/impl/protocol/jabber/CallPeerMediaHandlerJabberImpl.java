@@ -1822,6 +1822,8 @@ public class CallPeerMediaHandlerJabberImpl
             public void sendTransportInfo(
                 Iterable<ContentPacketExtension> contents)
             {
+                logger.info("Transport info handling is being skipped in Jitsi. IceLink will handle transport info requests.");
+                /*
                 try
                 {
                     getPeer().sendTransportInfo(contents);
@@ -1830,6 +1832,7 @@ public class CallPeerMediaHandlerJabberImpl
                 {
                     logger.error("Could not send transport info", e);
                 }
+                */
             }
         };
 
