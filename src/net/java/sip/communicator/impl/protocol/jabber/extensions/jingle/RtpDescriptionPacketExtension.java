@@ -51,6 +51,22 @@ public class RtpDescriptionPacketExtension
      */
     public static final String SSRC_ATTR_NAME = "ssrc";
 
+    // Mod for SDP<->Jingle convertor
+    /**
+     * The name of the <tt>profile</tt> description argument
+     */
+    public static final String PROFILE_ATTR_NAME = "profile";
+    public void setProfile(String profile)
+    {
+         super.setAttribute(PROFILE_ATTR_NAME, profile);
+    }
+
+    public String getProfile()
+    {
+        return getAttributeAsString(PROFILE_ATTR_NAME);
+    }
+    // end SDD<->Jingle mod
+
     /**
      * The list of payload types that this description element contains.
      */

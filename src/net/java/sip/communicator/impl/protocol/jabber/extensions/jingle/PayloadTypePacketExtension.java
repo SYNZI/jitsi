@@ -145,6 +145,30 @@ public class PayloadTypePacketExtension extends AbstractPacketExtension
         return getAttributeAsInt(CLOCKRATE_ATTR_NAME);
     }
 
+
+    // Modification for Jingle<->SDP converter to get/set clockrate as a string
+    /**
+     +     * Specifies the sampling frequency in Hertz used by this encoding.
+     +     *
+     +     * @param clockrate the sampling frequency in Hertz used by this encoding.
+     +     */
+    public void setClockrate(String clockrate)
+    {
+        super.setAttribute(CLOCKRATE_ATTR_NAME, clockrate);
+    }
+
+     /**
+     +     * Returns the sampling frequency in Hertz used by this encoding.
+     +     *
+     +     * @return the sampling frequency in Hertz used by this encoding.
+     +     */
+    public String getClockrateString()
+    {
+        return getAttributeAsString(CLOCKRATE_ATTR_NAME);
+    }
+    // end Jingle<->Sdp convertor mod.
+
+
     /**
      * Specifies the payload identifier for this encoding.
      *
