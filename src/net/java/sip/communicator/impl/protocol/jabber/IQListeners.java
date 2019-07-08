@@ -10,22 +10,20 @@ public class IQListeners {
         OnBeforeSend
     }
 
-    private static Map<IQEvent, ArrayList<IQListeners>> listeners = new HashMap<>();
+    private static Map<IQEvent, ArrayList<IQListener>> listeners = new HashMap<>();
 
-    public static void addListener(IQEvent, IQListener listener) {
+    public static void addListener(IQEvent event, IQListener listener) {
         if (!listeners.containsKey(event)) {
             listeners.put(event, new ArrayList<IQListener>());
         }
         listeners.get(event).add(listener);
     }
 
-    public static IQ triggerEvent(IQEvent event, IQ iq, XMPPConnection connection) {
+    public static void triggerEvent(IQEvent event, IQ iq, XMPPConnection connection) {
         if (listeners.containsKey(event)) {
-            for (IQListener j : listners.get(event)) {
-                iq = j.invoke(iq, connection);
+            for (IQListener j : listeners.get(event)) {
+                j.invoke(iq, connection);
             }
         }
-
-        return iq;
     }
 }

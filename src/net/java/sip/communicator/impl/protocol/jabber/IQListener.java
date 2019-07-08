@@ -5,5 +5,5 @@ import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.packet.*;
 
 public abstract class IQListener {
-    public abstract IQ invoke(IQ iq, XMPPConnection connection);
+    public abstract void invoke(IQ iq, XMPPConnection connection);
 }

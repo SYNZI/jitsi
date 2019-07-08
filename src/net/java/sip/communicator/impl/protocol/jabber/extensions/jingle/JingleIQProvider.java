@@ -74,6 +74,7 @@ public class JingleIQProvider extends IQProvider<JingleIQ>
                         (RTPHdrExtPacketExtension.class));
 
         // <sctpmap/> provider
+
         ProviderManager.addExtensionProvider(
                 SctpMapExtension.ELEMENT_NAME,
                 SctpMapExtension.NAMESPACE,

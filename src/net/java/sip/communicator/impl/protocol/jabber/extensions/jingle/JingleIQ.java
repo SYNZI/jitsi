@@ -419,7 +419,7 @@ public class JingleIQ extends IQ
     }
 
     @Override
-    protected void addCommonAttributes(org.javasoftware.smack.util.XmlStringBuilder xml) {
+    protected void addCommonAttributes(org.jivesoftware.smack.util.XmlStringBuilder xml) {
         xml.optAttribute("to", this.getTo());
         xml.optAttribute("from", this.getFrom());
         xml.optAttribute("id", this.getStanzaId());

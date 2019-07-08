@@ -1104,7 +1104,7 @@ public class OperationSetBasicTelephonyJabberImpl
             }.start();
             */
             // Raise session-initiate to Jigasi so IceLink can process.
-            Runnable runnable = () => {
+            Runnable runnable = () -> {
                 IQListeners.triggerEvent(IQListeners.IQEvent.OnReceive, jingleIQ, protocolProvider.getConnection());
             };
             Thread thread = new Thread(runnable);
@@ -1213,12 +1213,14 @@ public class OperationSetBasicTelephonyJabberImpl
         {
             // Raise source-add to Jigasi where IceLink will process.
             // callPeer.processSourceAdd(jingleIQ);
+            logger.fatal("!!!! - INCOMING SOURCE ADD - REMOVE THIS LOG")
             IQListeners.triggerEvent(IQListeners.IQEvent.OnReceive, jingleIQ, protocolProvider.getConnection());
         }
         else if (action == JingleAction.SOURCEREMOVE)
         {
             // Raise source-remove to Jigasi where IceLink will process
             //callPeer.processSourceRemove(jingleIQ);
+            logger.fatal("!!!!! - INCOMING SOURCE REMOVE = REMOTE THIS LOG");
             IQListeners.triggerEvent(IQListeners.IQEvent.OnReceive, jingleIQ, protocolProvider.getConnection());
         }
     }
