@@ -1112,12 +1112,12 @@ public class OperationSetBasicTelephonyJabberImpl
 
             return;
         }
-        else if (callPeer == null)
+        /*else if (callPeer == null)
         {
             if (logger.isDebugEnabled())
                 logger.debug("Received a stray trying response.");
             return;
-        }
+        }*/
 
         //the rest of these cases deal with existing peers
         else if(action == JingleAction.SESSION_TERMINATE)
