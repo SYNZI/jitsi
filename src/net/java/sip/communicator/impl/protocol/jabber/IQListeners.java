@@ -19,11 +19,13 @@ public class IQListeners {
         listeners.get(event).add(listener);
     }
 
-    public static void triggerEvent(IQEvent event, IQ iq, XMPPConnection connection) {
+    public static IQ triggerEvent(IQEvent event, IQ iq, XMPPConnection connection) {
         if (listeners.containsKey(event)) {
             for (IQListener j : listeners.get(event)) {
-                j.invoke(iq, connection);
+                iq = j.invoke(iq, connection);
             }
         }
+
+        return iq;
     }
 }
